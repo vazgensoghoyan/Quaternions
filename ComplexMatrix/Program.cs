@@ -14,8 +14,12 @@ namespace Program
                 { 6, 6, 8, 0, 0 }
             });
             Console.WriteLine(a);
-            Console.WriteLine(a.GetRow(1));
-            Console.WriteLine(a.GetColumn(1));
+
+            Console.WriteLine(Matrix.MergeHorizontally(a.GetColumn(0), a));
+            Console.WriteLine(Matrix.MergeVertically(a.GetRow(0), a));
+
+            Console.WriteLine(a.RemoveRow(1));
+            Console.WriteLine(a.RemoveColumn(3));
 
             Console.WriteLine(a.Determinant());
         }

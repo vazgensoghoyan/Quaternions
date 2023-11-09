@@ -135,6 +135,102 @@ namespace MathProject
             return new Matrix(r);
         }
 
+        public Matrix RemoveRow(int row)
+        {
+            var r = new Complex[M - 1, N];
+
+            var seen = false;
+
+            for (int i = 0; i < M; i++)
+            {
+                if (i == row)
+                {
+                    seen = true;
+                    continue;
+                }
+
+                for (int j = 0; j < N; j++)
+                {
+                    r[i - (seen ? 1 : 0), j] = X[i, j];
+                }
+            }
+
+            return new Matrix(r);
+        }
+
+        public Matrix RemoveColumn(int column)
+        {
+            var r = new Complex[M, N - 1];
+
+            var seen = false;
+
+            for (int j = 0; j < N; j++)
+            {
+                if (j == column)
+                {
+                    seen = true;
+                    continue;
+                }
+
+                for (int i = 0; i < N; i++)
+                {
+                    r[i, j - (seen ? 1 : 0)] = X[i, j];
+                }
+            }
+
+            return new Matrix(r);
+        }
+
+        public static Matrix MergeHorizontally(Matrix m1, Matrix m2)
+        {
+            if (m1.M != m2.M) throw new Exception();
+
+            int M = m1.M;
+            int N1 = m1.N;
+            int N = m1.N + m2.N;
+
+            var merged = new Complex[M, N];
+
+            for (int i = 0; i < M; i++)
+            {
+                int p1 = 0;
+                int p2 = 0;
+
+                while (p1 + p2 < N)
+                {
+                    merged[i, p1 + p2] = (p1 < N1) ? m1.Get(i, p1++) : m2.Get(i, p2++);
+                }
+            }
+
+            return new Matrix(merged);
+        }
+
+        public static Matrix MergeVertically(Matrix m1, Matrix m2)
+        {
+            if (m1.N != m2.N) throw new Exception();
+
+            int M1 = m1.M;
+            int M = m1.M + m2.M;
+            int N = m1.N;
+
+            var merged = new Complex[M, N];
+
+            int p1 = 0;
+            int p2 = 0;
+            while (p1 + p2 < M)
+            {
+                for (int j = 0; j < N; j++)
+                {
+                    merged[p1 + p2, j] = (p1 < M1) ? m1.Get(p1, j) : m2.Get(p2, j);
+                }
+
+                if (p1 < M1) p1++;
+                else p2++;
+            }
+
+            return new Matrix(merged);
+        }
+
         public Matrix Transposed()
         {
             var result = new Complex[N, M];
