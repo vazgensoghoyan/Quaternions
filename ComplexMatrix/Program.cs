@@ -18,8 +18,7 @@ namespace Program
             Console.WriteLine(Matrix.MergeHorizontally(a.GetColumn(0), a));
             Console.WriteLine(Matrix.MergeVertically(a.GetRow(0), a));
 
-            Console.WriteLine(a.RemoveRow(1));
-            Console.WriteLine(a.RemoveColumn(3));
+            Console.WriteLine(a.RemoveRowAndColumn(1, -1));
 
             Console.WriteLine(a.Determinant());
         }

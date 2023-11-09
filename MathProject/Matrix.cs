@@ -135,7 +135,41 @@ namespace MathProject
             return new Matrix(r);
         }
 
-        public Matrix RemoveRow(int row)
+        public Matrix RemoveRowAndColumn(int r, int c)
+        {
+            int resultM = M - (0 <= r && r < M ? 1 : 0);
+            int resultN = N - (0 <= c && c < N ? 1 : 0);
+
+            var result = new Complex[resultM, resultN];
+
+            int seenR = 0;
+
+            for (int i = 0; i < M; i++)
+            {
+                if (i == r)
+                {
+                    seenR = 1; 
+                    continue;
+                }
+
+                int seenC = 0;
+
+                for (int j = 0; j < N; j++)
+                {
+                    if (j == c)
+                    {
+                        seenC = 1;
+                        continue;
+                    }
+
+                    result[i - seenR, j - seenC] = X[i, j];
+                }
+            }
+
+            return new Matrix(result);
+        }
+
+        /*public Matrix RemoveRow(int row)
         {
             var r = new Complex[M - 1, N];
 
@@ -179,7 +213,7 @@ namespace MathProject
             }
 
             return new Matrix(r);
-        }
+        }*/
 
         public static Matrix MergeHorizontally(Matrix m1, Matrix m2)
         {
