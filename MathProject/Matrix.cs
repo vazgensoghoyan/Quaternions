@@ -169,51 +169,39 @@ namespace MathProject
             return new Matrix(result);
         }
 
-        /*public Matrix RemoveRow(int row)
+        public Matrix RemoveRow(int r) => RemoveRowAndColumn(r, -1);
+
+        public Matrix RemoveColumn(int c) => RemoveRowAndColumn(-1, c);
+
+        public Matrix InsertColumn(Matrix m, int c)
         {
-            var r = new Complex[M - 1, N];
+            if (!(m.N == 1 && M == m.M)) throw new Exception();
+            if (!(0 <= c && c < N)) throw new Exception();
 
-            var seen = false;
+            var result = new Complex[M, N + 1];
 
-            for (int i = 0; i < M; i++)
-            {
-                if (i == row)
-                {
-                    seen = true;
-                    continue;
-                }
-
-                for (int j = 0; j < N; j++)
-                {
-                    r[i - (seen ? 1 : 0), j] = X[i, j];
-                }
-            }
-
-            return new Matrix(r);
-        }
-
-        public Matrix RemoveColumn(int column)
-        {
-            var r = new Complex[M, N - 1];
-
-            var seen = false;
+            int seen = 0;
 
             for (int j = 0; j < N; j++)
             {
-                if (j == column)
+                if (j == c)
                 {
-                    seen = true;
-                    continue;
+                    seen = 1;
+
+                    for (int i = 0; i < M; i++)
+                    {
+                        result[i, j] = m.Get(i, 0);
+                    }
                 }
 
-                for (int i = 0; i < N; i++)
+                for (int i = 0; i < M; i++)
                 {
-                    r[i, j - (seen ? 1 : 0)] = X[i, j];
+                    result[i, j + seen] = X[i, j];
                 }
             }
 
-            return new Matrix(r);
-        }*/
+            return new Matrix(result);
+        }
 
         public static Matrix MergeHorizontally(Matrix m1, Matrix m2)
         {

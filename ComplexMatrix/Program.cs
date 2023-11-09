@@ -21,6 +21,8 @@ namespace Program
             Console.WriteLine(a.RemoveRowAndColumn(1, -1));
 
             Console.WriteLine(a.Determinant());
+
+            Console.WriteLine(a.InsertColumn(a.GetColumn(0), 3));
         }
     }
 }
