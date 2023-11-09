@@ -1,0 +1,15 @@
+C:\Users\Acer\Desktop\прочее\inegrating\integrate11\bin\Debug\net6.0\integrate11.exe
+C:\Users\Acer\Desktop\прочее\inegrating\integrate11\bin\Debug\net6.0\integrate11.deps.json
+C:\Users\Acer\Desktop\прочее\inegrating\integrate11\bin\Debug\net6.0\integrate11.runtimeconfig.json
+C:\Users\Acer\Desktop\прочее\inegrating\integrate11\bin\Debug\net6.0\integrate11.dll
+C:\Users\Acer\Desktop\прочее\inegrating\integrate11\bin\Debug\net6.0\integrate11.pdb
+C:\Users\Acer\Desktop\прочее\inegrating\integrate11\obj\Debug\net6.0\integrate11.csproj.AssemblyReference.cache
+C:\Users\Acer\Desktop\прочее\inegrating\integrate11\obj\Debug\net6.0\integrate11.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\Desktop\прочее\inegrating\integrate11\obj\Debug\net6.0\integrate11.AssemblyInfoInputs.cache
+C:\Users\Acer\Desktop\прочее\inegrating\integrate11\obj\Debug\net6.0\integrate11.AssemblyInfo.cs
+C:\Users\Acer\Desktop\прочее\inegrating\integrate11\obj\Debug\net6.0\integrate11.csproj.CoreCompileInputs.cache
+C:\Users\Acer\Desktop\прочее\inegrating\integrate11\obj\Debug\net6.0\integrate11.dll
+C:\Users\Acer\Desktop\прочее\inegrating\integrate11\obj\Debug\net6.0\refint\integrate11.dll
+C:\Users\Acer\Desktop\прочее\inegrating\integrate11\obj\Debug\net6.0\integrate11.pdb
+C:\Users\Acer\Desktop\прочее\inegrating\integrate11\obj\Debug\net6.0\integrate11.genruntimeconfig.cache
+C:\Users\Acer\Desktop\прочее\inegrating\integrate11\obj\Debug\net6.0\ref\integrate11.dll

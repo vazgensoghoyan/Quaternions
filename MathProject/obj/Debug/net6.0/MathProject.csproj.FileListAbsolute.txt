@@ -1,0 +1,12 @@
+C:\Users\Acer\Desktop\прочее\new_project\MathProject\bin\Debug\net6.0\MathProject.deps.json
+C:\Users\Acer\Desktop\прочее\new_project\MathProject\bin\Debug\net6.0\MathProject.dll
+C:\Users\Acer\Desktop\прочее\new_project\MathProject\bin\Debug\net6.0\MathProject.pdb
+C:\Users\Acer\Desktop\прочее\new_project\MathProject\obj\Debug\net6.0\MathProject.csproj.AssemblyReference.cache
+C:\Users\Acer\Desktop\прочее\new_project\MathProject\obj\Debug\net6.0\MathProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\Desktop\прочее\new_project\MathProject\obj\Debug\net6.0\MathProject.AssemblyInfoInputs.cache
+C:\Users\Acer\Desktop\прочее\new_project\MathProject\obj\Debug\net6.0\MathProject.AssemblyInfo.cs
+C:\Users\Acer\Desktop\прочее\new_project\MathProject\obj\Debug\net6.0\MathProject.csproj.CoreCompileInputs.cache
+C:\Users\Acer\Desktop\прочее\new_project\MathProject\obj\Debug\net6.0\MathProject.dll
+C:\Users\Acer\Desktop\прочее\new_project\MathProject\obj\Debug\net6.0\refint\MathProject.dll
+C:\Users\Acer\Desktop\прочее\new_project\MathProject\obj\Debug\net6.0\MathProject.pdb
+C:\Users\Acer\Desktop\прочее\new_project\MathProject\obj\Debug\net6.0\ref\MathProject.dll
