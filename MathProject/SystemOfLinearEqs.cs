@@ -28,7 +28,7 @@
 
             for (int i = 0; i < M; i++)
             {
-                
+                answers[0, i] = A.ReplaceColumn(B, i).Determinant() / det;
             }
 
             return new Matrix(answers);

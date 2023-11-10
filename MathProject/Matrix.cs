@@ -176,6 +176,9 @@ namespace MathProject
         public Matrix InsertColumn(Matrix m, int c)
         {
             if (!(m.N == 1 && M == m.M)) throw new Exception();
+
+            if (c == N) return MergeHorizontally(this, m);
+
             if (!(0 <= c && c < N)) throw new Exception();
 
             var result = new Complex[M, N + 1];
@@ -202,6 +205,8 @@ namespace MathProject
 
             return new Matrix(result);
         }
+
+        public Matrix ReplaceColumn(Matrix m, int c) => RemoveColumn(c).InsertColumn(m, c);
 
         public static Matrix MergeHorizontally(Matrix m1, Matrix m2)
         {
