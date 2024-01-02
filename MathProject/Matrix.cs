@@ -1,6 +1,4 @@
-﻿using System.Data.Common;
-
-namespace MathProject
+﻿namespace MathProject
 {
     public class Matrix
     {
