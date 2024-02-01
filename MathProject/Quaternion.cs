@@ -1,4 +1,5 @@
-﻿using static System.Math;
+﻿using System.Numerics;
+using static System.Math;
 
 namespace MathProject
 {
@@ -25,6 +26,14 @@ namespace MathProject
             Modulus = Sqrt(a * a + b * b + c * c + d * d);
         }
 
+        public Quaternion(double a, Vector3 v)
+        {
+            Z1 = new Complex(a, v.X);
+            Z2 = new Complex(v.Y, v.Z);
+
+            Modulus = Sqrt(Z1.Modulus * Z1.Modulus + Z2.Modulus * Z2.Modulus);
+        }
+
         public static Quaternion operator +(Quaternion p1, Quaternion p2)
         {
             return new Quaternion(p1.Z1 + p2.Z2, p1.Z2 + p2.Z2);
@@ -44,10 +53,6 @@ namespace MathProject
                 p1.Z1 * p2.Z1 - p1.Z2 * ~p2.Z2,
                 p1.Z1 * p2.Z2 + p1.Z2 * ~p2.Z1
             );
-        }
-        public static Quaternion operator /(Quaternion p1, Quaternion p2)
-        {
-            return p1 * p2.Inverse();
         }
         public static Quaternion operator ~(Quaternion p)
         {
@@ -82,6 +87,22 @@ namespace MathProject
         public Quaternion Inverse()
         {
             return new Quaternion(~this.Z1 / (Modulus * Modulus), -this.Z2 / (Modulus * Modulus));
+        }
+
+        public Vector3 ToVector3()
+        {
+            return new Vector3((float)Z1.Im, (float)Z2.Re, (float)Z2.Im);
+        }
+
+        public static Vector3 RotatePoint(Vector3 p, Vector3 u, double phi)
+        {
+            phi /= 2;
+            var v = new Quaternion(0, p);
+            var q = new Quaternion(Math.Cos(phi), Vector3.Normalize(u) * (float)Math.Sin(phi));
+
+            var answer = q * v * q.Inverse();
+
+            return answer.ToVector3();
         }
 
         public override string ToString()

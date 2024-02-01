@@ -1,5 +1,5 @@
 ﻿using MathProject;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Numerics;
 using static System.Math;
 
 namespace Program
@@ -30,7 +30,7 @@ namespace Program
 
         static void Main(string[] args)
         {
-            var a = new Complex[,] 
+            /*var a = new Complex[,] 
             {
                 { 1, new Complex(-1, 1), 8, 2 },
                 { 9, 24, -4, 23 },
@@ -63,7 +63,15 @@ namespace Program
             Console.WriteLine(p.Inverse());
             Console.WriteLine(p * p.Inverse() == 1);
 
-            Console.WriteLine(p / 2);
+            Console.WriteLine(p / 2);*/
+
+            var p = new Vector3(0, 0, 1);
+            var u = new Vector3(3, 0, 0);
+            var phi = Math.PI / 4;
+
+            var answer = MathProject.Quaternion.RotatePoint(p, u, phi);
+
+            Console.WriteLine(answer);
         }
     }
 }
