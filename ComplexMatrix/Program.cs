@@ -1,12 +1,14 @@
 ﻿using MathProject;
+using Object;
 using System.Numerics;
+using System.Runtime.ConstrainedExecution;
 using static System.Math;
 
 namespace Program
 {
     class Program
     {
-        static string F(double a1, double b1, double c1, double d1, double a2, double b2, double c2, double d2)
+        /*static string F(double a1, double b1, double c1, double d1, double a2, double b2, double c2, double d2)
         {
             double x1 = a1 * a2 - b1 * b2 - c1 * c2 - d1 * d2;
             double x2 = a1 * b2 + a2 * b1 + c1 * d2 - c2 * d1;
@@ -26,7 +28,7 @@ namespace Program
             double x4 = -d / Modulus;
 
             return string.Format("{0}+{1}*i+{2}*j+{3}*k", x1, x2, x3, x4);
-        }
+        }*/
 
         static void Main(string[] args)
         {
@@ -65,13 +67,15 @@ namespace Program
 
             Console.WriteLine(p / 2);*/
 
-            var p = new Vector3(0, 0, 1);
+            /*var p = new Vector3(0, 0, 1);
             var u = new Vector3(3, 0, 0);
             var phi = Math.PI / 4;
 
             var answer = MathProject.Quaternion.RotatePoint(p, u, phi);
 
-            Console.WriteLine(answer);
+            Console.WriteLine(answer);*/
+
+            var objFile = new ObjFile(@"C:\Users\Acer\Desktop\1.obj");
         }
     }
 }

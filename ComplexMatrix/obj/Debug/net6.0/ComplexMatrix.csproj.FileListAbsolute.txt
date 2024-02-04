@@ -16,3 +16,5 @@ C:\Users\Acer\Desktop\прочее\new_project\ComplexMatrix\obj\Debug\net6.0\re
 C:\Users\Acer\Desktop\прочее\new_project\ComplexMatrix\obj\Debug\net6.0\ComplexMatrix.pdb
 C:\Users\Acer\Desktop\прочее\new_project\ComplexMatrix\obj\Debug\net6.0\ComplexMatrix.genruntimeconfig.cache
 C:\Users\Acer\Desktop\прочее\new_project\ComplexMatrix\obj\Debug\net6.0\ref\ComplexMatrix.dll
+C:\Users\Acer\Desktop\прочее\new_project\ComplexMatrix\bin\Debug\net6.0\Object.dll
+C:\Users\Acer\Desktop\прочее\new_project\ComplexMatrix\bin\Debug\net6.0\Object.pdb

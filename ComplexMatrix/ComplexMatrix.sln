@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComplexMatrix", "ComplexMatrix.csproj", "{5BC172D8-6E68-435E-9E4B-182AF61647CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComplexMatrix", "ComplexMatrix.csproj", "{5BC172D8-6E68-435E-9E4B-182AF61647CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathProject", "..\MathProject\MathProject.csproj", "{61A0A4C7-2DAD-4C12-AD07-F96F92F0478E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathProject", "..\MathProject\MathProject.csproj", "{61A0A4C7-2DAD-4C12-AD07-F96F92F0478E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Object", "..\ObjFile\Object.csproj", "{9EDE8A64-5381-4717-9DCC-8925B0997F23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{61A0A4C7-2DAD-4C12-AD07-F96F92F0478E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61A0A4C7-2DAD-4C12-AD07-F96F92F0478E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61A0A4C7-2DAD-4C12-AD07-F96F92F0478E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EDE8A64-5381-4717-9DCC-8925B0997F23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EDE8A64-5381-4717-9DCC-8925B0997F23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EDE8A64-5381-4717-9DCC-8925B0997F23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EDE8A64-5381-4717-9DCC-8925B0997F23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

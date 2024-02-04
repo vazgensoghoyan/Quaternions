@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v6.0": {
       "ComplexMatrix/1.0.0": {
         "dependencies": {
-          "MathProject": "1.0.0"
+          "MathProject": "1.0.0",
+          "Object": "1.0.0"
         },
         "runtime": {
           "ComplexMatrix.dll": {}
@@ -17,6 +18,11 @@
       "MathProject/1.0.0": {
         "runtime": {
           "MathProject.dll": {}
+        }
+      },
+      "Object/1.0.0": {
+        "runtime": {
+          "Object.dll": {}
         }
       }
     }
@@ -28,6 +34,11 @@
       "sha512": ""
     },
     "MathProject/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Object/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

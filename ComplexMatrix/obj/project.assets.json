@@ -11,6 +11,16 @@
         "runtime": {
           "bin/placeholder/MathProject.dll": {}
         }
+      },
+      "Object/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Object.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Object.dll": {}
+        }
       }
     }
   },
@@ -19,11 +29,17 @@
       "type": "project",
       "path": "../MathProject/MathProject.csproj",
       "msbuildProject": "../MathProject/MathProject.csproj"
+    },
+    "Object/1.0.0": {
+      "type": "project",
+      "path": "../ObjFile/Object.csproj",
+      "msbuildProject": "../ObjFile/Object.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "MathProject >= 1.0.0"
+      "MathProject >= 1.0.0",
+      "Object >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -55,6 +71,9 @@
           "projectReferences": {
             "C:\\Users\\Acer\\Desktop\\прочее\\new_project\\MathProject\\MathProject.csproj": {
               "projectPath": "C:\\Users\\Acer\\Desktop\\прочее\\new_project\\MathProject\\MathProject.csproj"
+            },
+            "C:\\Users\\Acer\\Desktop\\прочее\\new_project\\ObjFile\\Object.csproj": {
+              "projectPath": "C:\\Users\\Acer\\Desktop\\прочее\\new_project\\ObjFile\\Object.csproj"
             }
           }
         }
