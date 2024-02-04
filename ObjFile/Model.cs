@@ -1,29 +1,40 @@
-﻿using System.Numerics;
+﻿using MathProject;
+using System.Numerics;
 
 namespace Object
 {
     public class Model
     {
-        private string Name;
-        private Vector3[] Vertices;
+        public string Name { get; }
+        public Vector3[] Vertices { get; }
         //public Vector2[] TextureVertices { get; }
-        private Vector3[] Normals;
-        private int[] Indexes;
+        //public Vector3[] Normals { get; }
+        public int[][] Indexes { get; }
         //public int[] TextureIndexes { get; }
-        private int[] NormalIndexes;
+        //public int[] NormalIndexes { get; }
 
-        public Model(string name, Vector3[] v, Vector3[] n, int[] i, int[] ni)
+        public Model(string name, Vector3[] v, int[][] i)
         {
             Name = name;
             Vertices = v;
-            Normals = n;
             Indexes = i; 
-            NormalIndexes = ni;
         }
 
-        public void Rotate()
+        public void Rotate(Vector3 u, double phi)
         {
+            for (int i = 0; i < Vertices.Length; i++)
+            {
+                Vertices[i] = MathProject.Quaternion.RotatePoint(Vertices[i], u, phi);
+            }
+        }
 
+        public void RotateX(double phi) => Rotate(new Vector3(1, 0, 0), phi);
+        public void RotateY(double phi) => Rotate(new Vector3(0, 1, 0), phi);
+        public void RotateZ(double phi) => Rotate(new Vector3(0, 0, 1), phi);
+
+        public override string ToString()
+        {
+            return "this is object named " + Name;
         }
     }
 }

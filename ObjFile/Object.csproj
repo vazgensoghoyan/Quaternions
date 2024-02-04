@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MathProject\MathProject.csproj" />
+  </ItemGroup>
+
 </Project>

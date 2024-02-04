@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "MathProject/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/MathProject.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MathProject.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "MathProject/1.0.0": {
+      "type": "project",
+      "path": "../MathProject/MathProject.csproj",
+      "msbuildProject": "../MathProject/MathProject.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "MathProject >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Acer\\.nuget\\packages\\": {}
@@ -33,7 +52,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Acer\\Desktop\\прочее\\new_project\\MathProject\\MathProject.csproj": {
+              "projectPath": "C:\\Users\\Acer\\Desktop\\прочее\\new_project\\MathProject\\MathProject.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -144,7 +144,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Acer\\Desktop\\прочее\\new_project\\MathProject\\MathProject.csproj": {
+                "projectPath": "C:\\Users\\Acer\\Desktop\\прочее\\new_project\\MathProject\\MathProject.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

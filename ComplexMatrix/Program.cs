@@ -1,5 +1,8 @@
 ﻿using MathProject;
 using Object;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using System.IO.Pipes;
 using System.Numerics;
 using System.Runtime.ConstrainedExecution;
 using static System.Math;
@@ -30,6 +33,7 @@ namespace Program
             return string.Format("{0}+{1}*i+{2}*j+{3}*k", x1, x2, x3, x4);
         }*/
 
+        
         static void Main(string[] args)
         {
             /*var a = new Complex[,] 
@@ -76,6 +80,11 @@ namespace Program
             Console.WriteLine(answer);*/
 
             var objFile = new ObjFile(@"C:\Users\Acer\Desktop\1.obj");
+            var model = objFile.GetModel(0);
+            model.RotateX(Math.PI / 6);
+            model.RotateZ(Math.PI / 5);
+            objFile.Clear();
+            objFile.AddModel(model);
         }
     }
 }

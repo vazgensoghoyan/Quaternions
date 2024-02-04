@@ -15,6 +15,9 @@
       "Object/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "MathProject": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Object.dll": {}
         },

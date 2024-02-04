@@ -1,57 +1,56 @@
 ﻿using System.Globalization;
+using System.IO;
 using System.Numerics;
 using System.Xml.Schema;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Object
 {
     public class ObjFile
     {
         public string Path { get; }
-        public Model[] Models { get; }
-        
+        // as i think its not good to read every time (if its what this does). I can deal with it later
+        public Model[] Models { get => Read(); }
+
         public ObjFile(string path)
         {
             Path = path;
-            Models = Read();
         }
 
         public Model[] Read()
         {
+            string modelName = string.Empty;
             var models = new List<Model>();
             var vertices = new List<Vector3>();
-            var normals = new List<Vector3>();
-            var indexes = new List<int>();
-            var normalIndexes = new List<int>();
-            string modelName = string.Empty;
+            var indexes = new List<int[]>();
             
             using (StreamReader reader = new StreamReader(Path))
             {
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-                    if (line == null) continue;
+                    if (line == null || line == string.Empty) continue;
 
-                    if (line[0] == 'o')
+                    switch (line[0])
                     {
-                        if (modelName != "")
-                        {
-                            models.Add(new Model(
-                                modelName,
-                                vertices.ToArray(),
-                                normals.ToArray(),
-                                indexes.ToArray(),
-                                normalIndexes.ToArray()
-                            ));
-                        }
-                        modelName = line.Substring(2);
-                    }
-                    else if (line[0] == 'v')
-                    {
-                        ReadVertex(line, vertices, normals);
-                    }
-                    else if (line[0] == 'f')
-                    {
-                        ReadPolygon(line, indexes, normalIndexes);
+                        case 'o':
+                            if (modelName != "")
+                            {
+                                models.Add(new Model(
+                                    modelName,
+                                    vertices.ToArray(),
+                                    indexes.ToArray()
+                                ));
+                            }
+                            modelName = line.Substring(2);
+                            break;
+                        case 'v':
+                            if (line[1] == ' ') 
+                                ReadVertex(line, vertices);
+                            break;
+                        case 'f':
+                            ReadPolygon(line, indexes);
+                            break;
                     }
                 }
             }
@@ -61,50 +60,80 @@ namespace Object
                 models.Add(new Model(
                     modelName,
                     vertices.ToArray(),
-                    normals.ToArray(),
-                    indexes.ToArray(),
-                    normalIndexes.ToArray()
+                    indexes.ToArray()
                 ));
             }
 
             return models.ToArray();
         }
 
-        static void ReadVertex(string line, List<Vector3> vertices, List<Vector3> normals)
+        static void ReadVertex(string line, List<Vector3> vertices)
         {
             var nums = line.Split(' ').Skip(1)
                 .Where(n => n != "")
                 .Select(n => float.Parse(n, CultureInfo.InvariantCulture))
                 .ToArray();
 
-            if (line[1] == 'n') {
-                normals.Add(Vector3.Normalize(new Vector3(nums[0], nums[1], nums[2])));
-            }
-            else {
-                vertices.Add(new Vector3(nums[0], nums[1], nums[2]));
-            }
+            vertices.Add(new Vector3(nums[0], nums[1], nums[2]));
         }
 
-        static void ReadPolygon(string line, List<int> indexes, List<int> normalIndexes)
+        static void ReadPolygon(string line, List<int[]> indexes)
         {
             var ind = line.Split(' ').Skip(1)
                 .Where(l => l != "")
-                .Select(l => l.Split('/').Select(n => n == "" ? 0 : int.Parse(n)).ToArray())
+                .Select(l => int.Parse(l.Split('/')[0]))
                 .ToArray();
 
-            for (int i = 1; i < ind.Length - 1; i++)
+            indexes.Add(ind);
+        }
+    
+        public Model? GetModel(int index)
+        {
+            if (0 <= index && index <= Models.Length)
             {
-                indexes.Add(ind[0][0] - 1);
-                indexes.Add(ind[i][0] - 1);
-                indexes.Add(ind[i + 1][0] - 1);
+                return Models[index];
+            }
+            return null;
+        }
 
-                if (ind[0].Length > 2)
-                {
+        public async void Clear()
+        {
+            using (StreamWriter writer = new StreamWriter(Path, false))
+            {
+                await writer.WriteLineAsync("");
+            }
+        }
 
-                    normalIndexes.Add(ind[0][2] - 1);
-                    normalIndexes.Add(ind[i][2] - 1);
-                    normalIndexes.Add(ind[i + 1][2] - 1);
-                }
+        public async void AddText(string text)
+        {
+            using (StreamWriter writer = new StreamWriter(Path, true))
+            {
+                await writer.WriteAsync(text);
+            }
+        }
+
+        public void AddModel(Model model)
+        {
+            var s = $"\no {model.Name}\n";
+
+            foreach (var v in model.Vertices) 
+            {
+                s += $"v {v.X} {v.Y} {v.Z}\n";
+            }
+
+            foreach (var f in model.Indexes)
+            {
+                s += $"f {string.Join(' ', f)}\n";
+            }
+
+            AddText(s);
+        }
+
+        public void AddFewModels(Model[] models)
+        {
+            foreach (var model in models)
+            {
+                AddModel(model);
             }
         }
     }

@@ -21,6 +21,9 @@
         }
       },
       "Object/1.0.0": {
+        "dependencies": {
+          "MathProject": "1.0.0"
+        },
         "runtime": {
           "Object.dll": {}
         }
