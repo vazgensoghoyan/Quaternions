@@ -1,4 +1,4 @@
-﻿using MathProject;
+﻿using MyMath;
 using System.Numerics;
 
 namespace Object
@@ -26,11 +26,11 @@ namespace Object
         {
             for (int i = 0; i < Vertices.Length; i++)
             {
-                Vertices[i] = MathProject.Quaternion.RotatePoint(Vertices[i], u, phi);
+                Vertices[i] = MyMath.Quaternion.RotatePoint(Vertices[i], u, phi);
             }
             for (int i = 0; i < Normals.Length; i++)
             {
-                Normals[i] = MathProject.Quaternion.RotatePoint(Normals[i], u, phi);
+                Normals[i] = MyMath.Quaternion.RotatePoint(Normals[i], u, phi);
             }
         }
 

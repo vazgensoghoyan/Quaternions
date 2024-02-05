@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Acer\\Desktop\\прочее\\new_project\\MathProject\\MathProject.csproj",
-      "projectName": "MathProject",
-      "projectPath": "C:\\Users\\Acer\\Desktop\\прочее\\new_project\\MathProject\\MathProject.csproj",
+      "projectUniqueName": "C:\\Users\\Acer\\Desktop\\прочее\\new_project\\MathProject\\MyMath.csproj",
+      "projectName": "MyMath",
+      "projectPath": "C:\\Users\\Acer\\Desktop\\прочее\\new_project\\MathProject\\MyMath.csproj",
       "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Acer\\Desktop\\прочее\\new_project\\MathProject\\obj\\",
       "projectStyle": "PackageReference",

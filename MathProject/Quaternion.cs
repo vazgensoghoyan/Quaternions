@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using static System.Math;
 
-namespace MathProject
+namespace MyMath
 {
     public class Quaternion
     {

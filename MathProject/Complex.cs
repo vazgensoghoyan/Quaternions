@@ -1,6 +1,6 @@
 ﻿using static System.Math;
 
-namespace MathProject
+namespace MyMath
 {
     public enum FormOfWriting
     {
