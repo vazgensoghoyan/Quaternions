@@ -22,8 +22,10 @@ namespace Object
             string modelName = string.Empty;
             var models = new List<Model>();
             var vertices = new List<Vector3>();
+            var normals = new List<Vector3>();
             var indexes = new List<int[]>();
-            
+            var normalIndexes = new List<int[]>();
+
             using (StreamReader reader = new StreamReader(Path))
             {
                 while (!reader.EndOfStream)
@@ -39,17 +41,18 @@ namespace Object
                                 models.Add(new Model(
                                     modelName,
                                     vertices.ToArray(),
-                                    indexes.ToArray()
+                                    normals.ToArray(),
+                                    indexes.ToArray(),
+                                    normalIndexes.ToArray()
                                 ));
                             }
                             modelName = line.Substring(2);
                             break;
                         case 'v':
-                            if (line[1] == ' ') 
-                                ReadVertex(line, vertices);
+                            ReadVertex(line, vertices, normals);
                             break;
                         case 'f':
-                            ReadPolygon(line, indexes);
+                            ReadPolygon(line, indexes, normalIndexes);
                             break;
                     }
                 }
@@ -60,31 +63,46 @@ namespace Object
                 models.Add(new Model(
                     modelName,
                     vertices.ToArray(),
-                    indexes.ToArray()
+                    normals.ToArray(),
+                    indexes.ToArray(),
+                    normalIndexes.ToArray()
                 ));
             }
 
             return models.ToArray();
         }
 
-        static void ReadVertex(string line, List<Vector3> vertices)
+        static void ReadVertex(string line, List<Vector3> vertices, List<Vector3> normals)
         {
             var nums = line.Split(' ').Skip(1)
                 .Where(n => n != "")
                 .Select(n => float.Parse(n, CultureInfo.InvariantCulture))
                 .ToArray();
 
-            vertices.Add(new Vector3(nums[0], nums[1], nums[2]));
+            if (line[1] == ' ')
+                vertices.Add(new Vector3(nums[0], nums[1], nums[2]));
+            else if (line[1] == 'n')
+                normals.Add(new Vector3(nums[0], nums[1], nums[2]));
         }
 
-        static void ReadPolygon(string line, List<int[]> indexes)
+        static void ReadPolygon(string line, List<int[]> indexes, List<int[]> normalIndexes)
         {
             var ind = line.Split(' ').Skip(1)
                 .Where(l => l != "")
-                .Select(l => int.Parse(l.Split('/')[0]))
+                .Select(l => l.Split('/').Select(n => n == "" ? 0 : int.Parse(n)).ToArray())
                 .ToArray();
 
-            indexes.Add(ind);
+            var forVerts = new List<int>();
+            var forNormals = new List<int>();
+
+            for (int i = 0; i < ind.Length; i++)
+            {
+                forVerts.Add(ind[i][0]);
+                forNormals.Add(ind[i][2]);
+            }
+
+            indexes.Add(forVerts.ToArray());
+            normalIndexes.Add(forNormals.ToArray());
         }
     
         public Model? GetModel(int index)
@@ -112,18 +130,33 @@ namespace Object
             }
         }
 
+        private string FlToStr(float x, int digitsAfterDot)
+        {
+            return x.ToString($"N{digitsAfterDot}", System.Globalization.CultureInfo.InvariantCulture);
+        }
+        
         public void AddModel(Model model)
         {
             var s = $"\no {model.Name}\n";
 
             foreach (var v in model.Vertices) 
             {
-                s += $"v {v.X} {v.Y} {v.Z}\n";
+                s += $"v {FlToStr(v.X, 6)} {FlToStr(v.Y, 6)} {FlToStr(v.Z, 6)}\n";
             }
 
-            foreach (var f in model.Indexes)
+            foreach (var v in model.Normals)
             {
-                s += $"f {string.Join(' ', f)}\n";
+                s += $"vn {FlToStr(v.X, 4)} {FlToStr(v.Y, 4)} {FlToStr(v.Z, 4)}\n";
+            }
+
+            for (int i = 0; i < model.Indexes.Length; i++)
+            {
+                s += "f";
+                for (int j = 0; j < model.Indexes[i].Length; j++)
+                {
+                    s += $" {model.Indexes[i][j]}//{model.NormalIndexes[i][j]}";
+                }
+                s += "\n";
             }
 
             AddText(s);

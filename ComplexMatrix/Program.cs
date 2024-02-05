@@ -81,8 +81,8 @@ namespace Program
 
             var objFile = new ObjFile(@"C:\Users\Acer\Desktop\1.obj");
             var model = objFile.GetModel(0);
-            model.RotateX(Math.PI / 6);
-            model.RotateZ(Math.PI / 5);
+            model.RotateZ(Math.PI / 4);
+            model.RotateY(Math.PI / 9);
             objFile.Clear();
             objFile.AddModel(model);
         }
