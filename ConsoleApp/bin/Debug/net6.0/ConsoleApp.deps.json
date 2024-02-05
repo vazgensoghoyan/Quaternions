@@ -6,6 +6,20 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
+      "ConsoleApp/1.0.0": {
+        "dependencies": {
+          "MyMath": "1.0.0",
+          "Object": "1.0.0"
+        },
+        "runtime": {
+          "ConsoleApp.dll": {}
+        }
+      },
+      "MyMath/1.0.0": {
+        "runtime": {
+          "MyMath.dll": {}
+        }
+      },
       "Object/1.0.0": {
         "dependencies": {
           "MyMath": "1.0.0"
@@ -13,21 +27,21 @@
         "runtime": {
           "Object.dll": {}
         }
-      },
-      "MyMath/1.0.0": {
-        "runtime": {
-          "MyMath.dll": {}
-        }
       }
     }
   },
   "libraries": {
-    "Object/1.0.0": {
+    "ConsoleApp/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
     "MyMath/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Object/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

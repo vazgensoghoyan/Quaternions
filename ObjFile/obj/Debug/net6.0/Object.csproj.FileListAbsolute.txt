@@ -10,6 +10,6 @@ C:\Users\Acer\Desktop\прочее\new_project\ObjFile\obj\Debug\net6.0\Object.d
 C:\Users\Acer\Desktop\прочее\new_project\ObjFile\obj\Debug\net6.0\refint\Object.dll
 C:\Users\Acer\Desktop\прочее\new_project\ObjFile\obj\Debug\net6.0\Object.pdb
 C:\Users\Acer\Desktop\прочее\new_project\ObjFile\obj\Debug\net6.0\ref\Object.dll
-C:\Users\Acer\Desktop\прочее\new_project\ObjFile\bin\Debug\net6.0\MathProject.dll
-C:\Users\Acer\Desktop\прочее\new_project\ObjFile\bin\Debug\net6.0\MathProject.pdb
 C:\Users\Acer\Desktop\прочее\new_project\ObjFile\obj\Debug\net6.0\Object.csproj.CopyComplete
+C:\Users\Acer\Desktop\прочее\new_project\ObjFile\bin\Debug\net6.0\MyMath.dll
+C:\Users\Acer\Desktop\прочее\new_project\ObjFile\bin\Debug\net6.0\MyMath.pdb
