@@ -1,9 +1,8 @@
 ﻿using Object;
 
 
-var objFile = new ObjFile(@"C:\Users\Acer\Desktop\1.obj");
+var objFile = new ObjFile(@"C:\Users\Acer\Desktop\tree\tree.obj");
 var model = objFile.GetModel(0);
-model.RotateZ(Math.PI / 4);
-model.RotateY(Math.PI / 9);
+model.RotateX(Math.PI / 2.1163);
 objFile.Clear();
 objFile.AddModel(model);

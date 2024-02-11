@@ -1,20 +1,17 @@
 ﻿using System.Globalization;
-using System.IO;
 using System.Numerics;
-using System.Xml.Schema;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Object
 {
     public class ObjFile
     {
         public string Path { get; }
-        // as i think its not good to read every time (if its what this does). I can deal with it later
-        public Model[] Models { get => Read(); }
+        public Model[] Models { get; private set; }
 
         public ObjFile(string path)
         {
             Path = path;
+            Models = Read();
         }
 
         public Model[] Read()
@@ -22,9 +19,9 @@ namespace Object
             string modelName = string.Empty;
             var models = new List<Model>();
             var vertices = new List<Vector3>();
-            var normals = new List<Vector3>();
             var indexes = new List<int[]>();
-            var normalIndexes = new List<int[]>();
+
+            var text = string.Empty;
 
             using (StreamReader reader = new StreamReader(Path))
             {
@@ -41,18 +38,17 @@ namespace Object
                                 models.Add(new Model(
                                     modelName,
                                     vertices.ToArray(),
-                                    normals.ToArray(),
-                                    indexes.ToArray(),
-                                    normalIndexes.ToArray()
+                                    indexes.ToArray()
                                 ));
                             }
                             modelName = line.Substring(2);
                             break;
                         case 'v':
-                            ReadVertex(line, vertices, normals);
+                            if (line[1] == ' ')
+                                ReadVertex(line, vertices);
                             break;
                         case 'f':
-                            ReadPolygon(line, indexes, normalIndexes);
+                            ReadPolygon(line, indexes);
                             break;
                     }
                 }
@@ -63,46 +59,31 @@ namespace Object
                 models.Add(new Model(
                     modelName,
                     vertices.ToArray(),
-                    normals.ToArray(),
-                    indexes.ToArray(),
-                    normalIndexes.ToArray()
+                    indexes.ToArray()
                 ));
             }
 
             return models.ToArray();
         }
 
-        static void ReadVertex(string line, List<Vector3> vertices, List<Vector3> normals)
+        static void ReadVertex(string line, List<Vector3> vertices)
         {
             var nums = line.Split(' ').Skip(1)
                 .Where(n => n != "")
                 .Select(n => float.Parse(n, CultureInfo.InvariantCulture))
                 .ToArray();
 
-            if (line[1] == ' ')
-                vertices.Add(new Vector3(nums[0], nums[1], nums[2]));
-            else if (line[1] == 'n')
-                normals.Add(new Vector3(nums[0], nums[1], nums[2]));
+            vertices.Add(new Vector3(nums[0], nums[1], nums[2]));
         }
 
-        static void ReadPolygon(string line, List<int[]> indexes, List<int[]> normalIndexes)
+        static void ReadPolygon(string line, List<int[]> indexes)
         {
             var ind = line.Split(' ').Skip(1)
                 .Where(l => l != "")
-                .Select(l => l.Split('/').Select(n => n == "" ? 0 : int.Parse(n)).ToArray())
+                .Select(l => int.Parse(l.Split('/')[0]))
                 .ToArray();
 
-            var forVerts = new List<int>();
-            var forNormals = new List<int>();
-
-            for (int i = 0; i < ind.Length; i++)
-            {
-                forVerts.Add(ind[i][0]);
-                forNormals.Add(ind[i][2]);
-            }
-
-            indexes.Add(forVerts.ToArray());
-            normalIndexes.Add(forNormals.ToArray());
+            indexes.Add(ind);
         }
     
         public Model? GetModel(int index)
@@ -120,46 +101,43 @@ namespace Object
             {
                 await writer.WriteLineAsync("");
             }
+
+            Models = new Model[0];
         }
 
         public async void AddText(string text)
         {
-            using (StreamWriter writer = new StreamWriter(Path, true))
+            foreach (var line in text.Split('\n'))
             {
-                await writer.WriteAsync(text);
+                using (StreamWriter writer = new StreamWriter(Path, true))
+                {
+                    await writer.WriteLineAsync(line);
+                }
             }
+
+            Models = Read();
         }
 
         private string FlToStr(float x, int digitsAfterDot)
         {
-            return x.ToString($"N{digitsAfterDot}", System.Globalization.CultureInfo.InvariantCulture);
+            return x.ToString($"N{digitsAfterDot}", CultureInfo.InvariantCulture);
         }
         
         public void AddModel(Model model)
         {
-            var s = $"\no {model.Name}\n";
+            var text = $"\no {model.Name}\n";
 
-            foreach (var v in model.Vertices) 
+            foreach (var v in model.Vertices)
             {
-                s += $"v {FlToStr(v.X, 6)} {FlToStr(v.Y, 6)} {FlToStr(v.Z, 6)}\n";
+                text += $"v {FlToStr(v.X, 6)} {FlToStr(v.Y, 6)} {FlToStr(v.Z, 6)}\n";
             }
 
-            foreach (var v in model.Normals)
+            foreach (var i in model.Indexes)
             {
-                s += $"vn {FlToStr(v.X, 4)} {FlToStr(v.Y, 4)} {FlToStr(v.Z, 4)}\n";
+                text += $"f {string.Join(' ', i)}\n";
             }
 
-            for (int i = 0; i < model.Indexes.Length; i++)
-            {
-                s += "f";
-                for (int j = 0; j < model.Indexes[i].Length; j++)
-                {
-                    s += $" {model.Indexes[i][j]}//{model.NormalIndexes[i][j]}";
-                }
-                s += "\n";
-            }
-
-            AddText(s);
+            AddText(text);
         }
 
         public void AddFewModels(Model[] models)

@@ -36,7 +36,7 @@ namespace MyMath
 
         public static Quaternion operator +(Quaternion p1, Quaternion p2)
         {
-            return new Quaternion(p1.Z1 + p2.Z2, p1.Z2 + p2.Z2);
+            return new Quaternion(p1.Z1 + p2.Z1, p1.Z2 + p2.Z2);
         }
         public static Quaternion operator -(Quaternion p1, Quaternion p2)
         {
