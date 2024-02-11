@@ -1,5 +1,8 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Numerics;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Object
 {
@@ -21,8 +24,6 @@ namespace Object
             var vertices = new List<Vector3>();
             var indexes = new List<int[]>();
 
-            var text = string.Empty;
-
             using (StreamReader reader = new StreamReader(Path))
             {
                 while (!reader.EndOfStream)
@@ -30,28 +31,13 @@ namespace Object
                     var line = reader.ReadLine();
                     if (line == null || line == string.Empty) continue;
 
-                    switch (line[0])
-                    {
-                        case 'o':
-                            if (modelName != "")
-                            {
-                                models.Add(new Model(
-                                    modelName,
-                                    vertices.ToArray(),
-                                    indexes.ToArray()
-                                ));
-                            }
-                            modelName = line.Substring(2);
-                            break;
-                        case 'v':
-                            if (line[1] == ' ')
-                                ReadVertex(line, vertices);
-                            break;
-                        case 'f':
-                            ReadPolygon(line, indexes);
-                            break;
-                    }
+                    modelName = ReadLine(line, modelName, models, vertices, indexes);
                 }
+            }
+
+            if (modelName == "" && vertices.Any())
+            {
+                modelName = "SomeObject";
             }
 
             if (modelName != "")
@@ -64,6 +50,33 @@ namespace Object
             }
 
             return models.ToArray();
+        }
+
+        static string ReadLine(string line, string modelName, List<Model> models, List<Vector3> vertices, List<int[]> indexes)
+        {
+            switch (line[0])
+            {
+                case 'o':
+                    if (modelName != "")
+                    {
+                        models.Add(new Model(
+                            modelName,
+                            vertices.ToArray(),
+                            indexes.ToArray()
+                        ));
+                    }
+                    modelName = line.Substring(2);
+                    break;
+                case 'v':
+                    if (line[1] == ' ')
+                        ReadVertex(line, vertices);
+                    break;
+                case 'f':
+                    ReadPolygon(line, indexes);
+                    break;
+            }
+
+            return modelName;
         }
 
         static void ReadVertex(string line, List<Vector3> vertices)
@@ -88,7 +101,7 @@ namespace Object
     
         public Model? GetModel(int index)
         {
-            if (0 <= index && index <= Models.Length)
+            if (0 <= index && index < Models.Length)
             {
                 return Models[index];
             }
