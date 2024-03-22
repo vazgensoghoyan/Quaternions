@@ -1,5 +1,4 @@
-﻿using MyMath;
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace Object
 {

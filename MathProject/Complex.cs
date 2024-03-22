@@ -1,4 +1,5 @@
-﻿using static System.Math;
+﻿using MyMath;
+using static System.Math;
 
 namespace MyMath
 {

@@ -10,20 +10,20 @@ namespace MyMath
 
         public double Modulus { get; }
 
-        public Quaternion(Complex z1, Complex z2)
-        {
-            Z1 = z1;
-            Z2 = z2;
-
-            Modulus = Sqrt(z1.Modulus * z1.Modulus + z2.Modulus * z2.Modulus);
-        }
-
         public Quaternion(double a, double b, double c, double d)
         {
             Z1 = new Complex(a, b);
             Z2 = new Complex(c, d);
 
             Modulus = Sqrt(a * a + b * b + c * c + d * d);
+        }
+
+        public Quaternion(Complex z1, Complex z2)
+        {
+            Z1 = z1;
+            Z2 = z2;
+
+            Modulus = Sqrt(z1.Modulus * z1.Modulus + z2.Modulus * z2.Modulus);
         }
 
         public Quaternion(double a, Vector3 v)
