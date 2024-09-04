@@ -1,2 +1,9 @@
-bin
-obj
+MathProject/bin
+MathProject/obj
+MathProject/.vs
+ObjFile/bin
+ObjFile/obj
+ObjFile/.vs
+ConsoleApp/bin
+ConsoleApp/obj
+ConsoleApp/.vs
